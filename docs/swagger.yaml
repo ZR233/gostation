@@ -28,12 +28,12 @@ info:
     email: support@swagger.io
     name: API Support
     url: http://www.swagger.io/support
-  description: WifiDig 无线探测平台后台服务
+  description: WifiDig 建站基本框架
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: http://swagger.io/terms/
-  title: WifiDig API 文档
+  title: GoStation API 文档
   version: "1.0"
 paths:
   /Auth/GenVerifyPic:
@@ -172,40 +172,4 @@ paths:
       summary: 用户信息
       tags:
       - 用户
-securityDefinitions:
-  ApiKeyAuth:
-    in: header
-    name: Authorization
-    type: apiKey
-  BasicAuth:
-    type: basic
-  OAuth2AccessCode:
-    authorizationUrl: https://example.com/oauth/authorize
-    flow: accessCode
-    scopes:
-      admin: ' Grants read and write access to administrative information'
-    tokenUrl: https://example.com/oauth/token
-    type: oauth2
-  OAuth2Application:
-    flow: application
-    scopes:
-      admin: ' Grants read and write access to administrative information'
-      write: ' Grants write access'
-    tokenUrl: https://example.com/oauth/token
-    type: oauth2
-  OAuth2Implicit:
-    authorizationUrl: https://example.com/oauth/authorize
-    flow: implicit
-    scopes:
-      admin: ' Grants read and write access to administrative information'
-      write: ' Grants write access'
-    type: oauth2
-  OAuth2Password:
-    flow: password
-    scopes:
-      admin: ' Grants read and write access to administrative information'
-      read: ' Grants read access'
-      write: ' Grants write access'
-    tokenUrl: https://example.com/oauth/token
-    type: oauth2
 swagger: "2.0"
