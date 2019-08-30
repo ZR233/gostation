@@ -1,0 +1,211 @@
+basePath: /v1
+definitions:
+  controller.LoginResponse:
+    properties:
+      code:
+        type: integer
+      memo:
+        type: string
+      rs:
+        type: object
+    type: object
+  controller.ResponseBase:
+    properties:
+      code:
+        type: integer
+      memo:
+        type: string
+    type: object
+  controller.ResponseVerifyPic:
+    properties:
+      id:
+        type: string
+      pic:
+        type: string
+    type: object
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: WifiDig 无线探测平台后台服务
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: WifiDig API 文档
+  version: "1.0"
+paths:
+  /Auth/GenVerifyPic:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 获取验证图片和验证id
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controller.ResponseVerifyPic'
+      summary: 获取验证图片
+      tags:
+      - Auth
+  /Auth/SignIn:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 用户登录并返回token
+      parameters:
+      - description: 用户名,邮箱,手机号
+        in: formData
+        name: verifyName
+        required: true
+        type: string
+      - description: 密码
+        in: formData
+        name: verifyCode
+        required: true
+        type: string
+      - description: 来源
+        in: formData
+        name: src
+        required: true
+        type: string
+      - description: 图形验证码id
+        in: formData
+        name: picId
+        required: true
+        type: string
+      - description: 图形验证码
+        in: formData
+        name: picCode
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controller.LoginResponse'
+      summary: 用户登录
+      tags:
+      - Auth
+  /Auth/SignOut:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 用户退出
+      parameters:
+      - description: Token
+        in: formData
+        name: token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 用户退出
+      tags:
+      - Auth
+  /Auth/SignUp:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 所有用户用此接口注册
+      parameters:
+      - description: 用户名
+        in: formData
+        name: userCode
+        required: true
+        type: string
+      - description: 密码
+        in: formData
+        name: password
+        required: true
+        type: string
+      - description: 邮箱
+        in: formData
+        name: email
+        type: string
+      - description: 手机号
+        in: formData
+        name: phone
+        type: string
+      - description: 姓名
+        in: formData
+        name: name
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controller.ResponseBase'
+      summary: 用户注册
+      tags:
+      - Auth
+  /User/UserInfo:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 用户信息
+      parameters:
+      - description: Token
+        in: formData
+        name: token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 用户信息
+      tags:
+      - 用户
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+  BasicAuth:
+    type: basic
+  OAuth2AccessCode:
+    authorizationUrl: https://example.com/oauth/authorize
+    flow: accessCode
+    scopes:
+      admin: ' Grants read and write access to administrative information'
+    tokenUrl: https://example.com/oauth/token
+    type: oauth2
+  OAuth2Application:
+    flow: application
+    scopes:
+      admin: ' Grants read and write access to administrative information'
+      write: ' Grants write access'
+    tokenUrl: https://example.com/oauth/token
+    type: oauth2
+  OAuth2Implicit:
+    authorizationUrl: https://example.com/oauth/authorize
+    flow: implicit
+    scopes:
+      admin: ' Grants read and write access to administrative information'
+      write: ' Grants write access'
+    type: oauth2
+  OAuth2Password:
+    flow: password
+    scopes:
+      admin: ' Grants read and write access to administrative information'
+      read: ' Grants read access'
+      write: ' Grants write access'
+    tokenUrl: https://example.com/oauth/token
+    type: oauth2
+swagger: "2.0"
